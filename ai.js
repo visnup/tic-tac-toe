@@ -65,7 +65,7 @@ module.exports = {
     return _.sample(possibleMoves(board));
   },
   best: function bestMove(board, player) {
-    return _.max((possibleMoves(board)), function(move) {
+    return _.max(_.shuffle(possibleMoves(board)), function(move) {
       var r = evaluate(_.tap(_.cloneDeep(board), function(next) {
         next[move[0]][move[1]] = player;
       }), player);
