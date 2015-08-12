@@ -8,7 +8,9 @@ function possibleMoves(board) {
   }, []);
 }
 
+var n = 0;
 function evaluate(board, player) {
+  //if (++n % 10000 === 0) console.log(n);
   //console.log(String([board, player]));
   // check win condition
   var winner = winnerBy(board) ||
@@ -23,8 +25,8 @@ function evaluate(board, player) {
   var possible = possibleMoves(board),
       opponent = player === 'X' ? 'O' : 'X';
   return _.sum(possible, function(move) {
-    return evaluate(_.tap(_.cloneDeep(board), function(next) {
-      next[move[0]][move[1]] = player
+    return -evaluate(_.tap(_.cloneDeep(board), function(next) {
+      next[move[0]][move[1]] = opponent
     }), opponent);
   }) / possible.length / 2;
 }
@@ -67,7 +69,7 @@ module.exports = {
       var r = evaluate(_.tap(_.cloneDeep(board), function(next) {
         next[move[0]][move[1]] = player;
       }), player);
-      console.log(move, r);
+      //console.log(move, r);
       return r;
     });
   },
