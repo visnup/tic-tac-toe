@@ -1,14 +1,23 @@
 var AI = require('./ai'),
     _ = require('lodash');
+/*
+console.log(AI.best([
+  [ 'O', null, 'O' ],
+  [ null, 'X', null ],
+  [ 'X', null, null ],
+], 'O'));
+process.exit();
+*/
 
 var board = [
   [ null, null, null ],
   [ null, null, null ],
   [ null, null, null ],
 ];
+
 var players = {
   'X': AI.best,
-  'O': AI.best,
+  'O': AI.random,
 };
 var player = 'X',
     result;

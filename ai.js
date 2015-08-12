@@ -9,6 +9,7 @@ function possibleMoves(board) {
 }
 
 function evaluate(board, player) {
+  //console.log(String([board, player]));
   // check win condition
   var winner = winnerBy(board) ||
     winnerBy(_.unzip(board)) ||
@@ -19,11 +20,12 @@ function evaluate(board, player) {
     return 0;
 
   // how many possible win conditions exist at the shortest depth
-  var possible = possibleMoves(board);
+  var possible = possibleMoves(board),
+      opponent = player === 'X' ? 'O' : 'X';
   return _.sum(possible, function(move) {
     return evaluate(_.tap(_.cloneDeep(board), function(next) {
-      next[move[0]][move[1]] = player === 'X' ? 'O' : 'X';
-    }), player);
+      next[move[0]][move[1]] = player
+    }), opponent);
   }) / possible.length / 2;
 }
 
@@ -61,10 +63,12 @@ module.exports = {
     return _.sample(possibleMoves(board));
   },
   best: function bestMove(board, player) {
-    return _.max(_.shuffle(possibleMoves(board)), function(move) {
-      return evaluate(_.tap(_.cloneDeep(board), function(next) {
+    return _.max((possibleMoves(board)), function(move) {
+      var r = evaluate(_.tap(_.cloneDeep(board), function(next) {
         next[move[0]][move[1]] = player;
       }), player);
+      console.log(move, r);
+      return r;
     });
   },
   end: function(board) {
