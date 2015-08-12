@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ai.js",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visnup/tic-tac-toe.git"
+  },
+  "author": "Visnu Pitiyanuvath <visnup@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/visnup/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/visnup/tic-tac-toe#readme"
+}
