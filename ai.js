@@ -8,9 +8,7 @@ function possibleMoves(board) {
   }, []);
 }
 
-var n = 0;
 function evaluate(board, player) {
-  //if (++n % 10000 === 0) console.log(n);
   //console.log(String([board, player]));
   // check win condition
   var winner = winnerBy(board) ||
