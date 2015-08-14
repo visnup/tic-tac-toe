@@ -11,8 +11,9 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'ng-annotate!babel' },
+      { test: /\.js$/, loader: 'ng-annotate!babel', exclude: /node_modules/ },
       { test: /\.jade$/, loader: 'jade' },
+      { test: /\.css$/, loader: 'style!css' },
     ],
   },
 

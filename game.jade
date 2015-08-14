@@ -1,0 +1,4 @@
+.board( layout="column" layout-fill )
+  .row( flex layout="row" ng-repeat="(i, row) in game.board" )
+    .col( flex layout="row" layout-align="center center" ng-repeat="(j, col) in row track by j" ng-click="game.play(i, j)" )
+      .md-display-4 {{col || '_'}}
