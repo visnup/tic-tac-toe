@@ -22,11 +22,11 @@ function evaluate(board, player) {
   // how many possible win conditions exist at the shortest depth
   var possible = possibleMoves(board),
       opponent = player === 'x' ? 'o' : 'x';
-  return _.sum(possible, function(move) {
+  return _.min(_.map(possible, function(move) {
     return -evaluate(_.tap(_.cloneDeep(board), function(next) {
       next[move[0]][move[1]] = opponent
     }), opponent);
-  }) / possible.length / 2;
+  }));
 }
 
 evaluate = _.memoize(evaluate, function(board, player) {

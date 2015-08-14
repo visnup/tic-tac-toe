@@ -1,11 +1,12 @@
 var AI = require('./ai'),
     _ = require('lodash');
+
 /*
 console.log(AI.best([
-  [ 'O', null, 'O' ],
-  [ null, 'X', null ],
-  [ 'X', null, null ],
-], 'O'));
+  [ 'x', null, null ],
+  [ null, 'o', null ],
+  [ null, null, 'x' ],
+], 'o'));
 process.exit();
 */
 
@@ -16,16 +17,16 @@ var board = [
 ];
 
 var players = {
-  'X': AI.best,
-  'O': AI.random,
+  'x': AI.best,
+  'o': AI.best,
 };
-var player = 'X',
+var player = 'x',
     result;
 while (!(result = AI.end(board))) {
   var move = players[player](board, player);
   board[move[0]][move[1]] = player;
   console.log(toString(board));
-  player = player === 'X' ? 'O' : 'X';
+  player = player === 'x' ? 'o' : 'x';
 }
 console.log(result);
 
