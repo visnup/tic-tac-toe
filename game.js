@@ -5,19 +5,23 @@ import AI from './ai';
 export default angular.module('tic-tac-toe', [
   require('angular-material'),
 ])
-.directive('game', ($timeout) => {
+.directive('game', ($timeout, $mdDialog) => {
   return {
     controller: class {
       constructor($scope) {
-        this.turn = 'x';
         this.players = { x: 'human', o: 'human' };
+        this.reset();
+
+        $scope.$watch('game.players', this.checkTurn.bind(this), true);
+      }
+
+      reset() {
+        this.turn = 'x';
         this.board = [
           [ null, null, null ],
           [ null, null, null ],
           [ null, null, null ],
         ];
-
-        $scope.$watch('game.players', this.checkTurn.bind(this), true);
       }
 
       play(move) {
@@ -25,10 +29,16 @@ export default angular.module('tic-tac-toe', [
           return;
 
         this.board[move[0]][move[1]] = this.turn;
-        this.turn = this.turn === 'x' ? 'o' : 'x';
 
-        if (!AI.end(this.board))
-          this.checkTurn();
+        var ending = AI.end(this.board);
+        if (ending) {
+          ending = ending === true ? 'Tie' : `${ending} won`;
+          ending = $mdDialog.alert().title(ending).ok('Replay');
+          return $mdDialog.show(ending).then(this.reset.bind(this));
+        }
+        
+        this.turn = this.turn === 'x' ? 'o' : 'x';
+        this.checkTurn();
       }
 
       checkTurn() {
