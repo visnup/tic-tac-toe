@@ -23,7 +23,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --content-base=dist",
+    "start": "webpack-dev-server --hot --inline",
     "test": "node test.js"
   },
   "repository": {

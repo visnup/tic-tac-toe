@@ -1,10 +1,10 @@
 md-toolbar( layout="row" layout-align="space-around center" )
-  md-select( flex="20" ng-model="game.players.x" )
+  md-select( flex="33" flex-gt-sm="20" ng-model="game.players.x" )
     md-option( value='human' ) Human
     md-option( value='random' ) Easy
     md-option( value='best' ) Hard
   i vs.
-  md-select( flex="20" ng-model="game.players.o" )
+  md-select( flex="33" flex-gt-sm="20" ng-model="game.players.o" )
     md-option( value='human' ) Human
     md-option( value='random' ) Easy
     md-option( value='best' ) Hard
