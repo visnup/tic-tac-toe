@@ -23,6 +23,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
+    "deploy": "git checkout gh-pages && git reset --hard master && webpack -p && git add index.html main-*.js* && git commit -am 'release' && git push -f origin HEAD:gh-pages && git checkout master",
     "start": "webpack-dev-server --hot --inline",
     "test": "node test.js"
   },
