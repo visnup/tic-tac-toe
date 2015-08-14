@@ -16,12 +16,13 @@ export default angular.module('tic-tac-toe', [
       }
 
       reset() {
-        this.turn = 'x';
         this.board = [
           [ null, null, null ],
           [ null, null, null ],
           [ null, null, null ],
         ];
+        this.turn = 'x';
+        this.checkTurn();
       }
 
       play(move) {
