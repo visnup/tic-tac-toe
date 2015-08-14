@@ -4,6 +4,8 @@ var jade = require('jade');
 module.exports = {
   entry: './game.js',
 
+  devtool: 'source-map',
+
   output: {
     path: 'dist',
     filename: '[name]-[hash].js'

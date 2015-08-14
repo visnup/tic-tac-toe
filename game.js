@@ -1,31 +1,42 @@
 import { module } from 'angular';
-import { best, random } from './ai';
 import css from 'angular-material/angular-material.css';
+import AI from './ai';
 
 export default angular.module('tic-tac-toe', [
   require('angular-material'),
 ])
-.directive('game', function() {
+.directive('game', ($timeout) => {
   return {
-    controller: class Game {
-      constructor() {
+    controller: class {
+      constructor($scope) {
+        this.turn = 'x';
+        this.players = { x: 'human', o: 'human' };
         this.board = [
           [ null, null, null ],
           [ null, null, null ],
           [ null, null, null ],
         ];
-        this.turn = 'X';
+
+        $scope.$watch('game.players', this.checkTurn.bind(this), true);
       }
 
-      play(i, j) {
-        if (this.board[i][j])
+      play(move) {
+        if (this.board[move[0]][move[1]])
           return;
 
-        this.board[i][j] = this.turn;
-        var ai = best(this.board, 'O');
-        this.board[ai[0]][ai[1]] = 'O';
+        this.board[move[0]][move[1]] = this.turn;
+        this.turn = this.turn === 'x' ? 'o' : 'x';
 
-        //this.turn = this.turn === 'X' ? 'O' : 'X';
+        if (!AI.end(this.board))
+          this.checkTurn();
+      }
+
+      checkTurn() {
+        if (this.players[this.turn] !== 'human') {
+          $timeout(() => {
+            this.play(AI[this.players[this.turn]](this.board, this.turn));
+          }, 100);
+        }
       }
     },
     controllerAs: 'game',

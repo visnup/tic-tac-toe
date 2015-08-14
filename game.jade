@@ -1,4 +1,14 @@
-.board( layout="column" layout-fill )
+md-toolbar( layout="row" layout-align="space-around center" )
+  md-select( flex="20" ng-model="game.players.x" )
+    md-option( value='human' ) Human
+    md-option( value='random' ) Easy
+    md-option( value='best' ) Hard
+  i vs.
+  md-select( flex="20" ng-model="game.players.o" )
+    md-option( value='human' ) Human
+    md-option( value='random' ) Easy
+    md-option( value='best' ) Hard
+
+md-content( layout="column" layout-fill )
   .row( flex layout="row" ng-repeat="(i, row) in game.board" )
-    .col( flex layout="row" layout-align="center center" ng-repeat="(j, col) in row track by j" ng-click="game.play(i, j)" )
-      .md-display-4 {{col || '_'}}
+    md-card.md-display-4( flex layout="row" layout-align="center center" ng-repeat="(j, col) in row track by j" ng-click="game.play([i, j])" style="text-transform: uppercase" ) {{col || '&nbsp;'}}
