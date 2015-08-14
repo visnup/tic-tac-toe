@@ -33,9 +33,13 @@ export default angular.module('tic-tac-toe', [
 
         var ending = AI.end(this.board);
         if (ending) {
-          ending = ending === true ? 'Tie' : `${ending} won`;
-          ending = $mdDialog.alert().title(ending).ok('Replay');
-          return $mdDialog.show(ending).then(this.reset.bind(this));
+          if (this.players.x === 'human' || this.players.o === 'human') {
+            ending = ending === true ? 'Tie' : `${ending} won`;
+            ending = $mdDialog.alert().title(ending).ok('Replay');
+            return $mdDialog.show(ending).then(this.reset.bind(this));
+          } else {
+            $timeout(this.reset.bind(this), 100);
+          }
         }
         
         this.turn = this.turn === 'x' ? 'o' : 'x';
